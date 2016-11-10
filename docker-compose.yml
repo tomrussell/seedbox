@@ -8,6 +8,8 @@ volumes:
         driver: local
     torrents:
         driver: local
+    deluge:
+        driver: local
 
 services:
     frontend:
@@ -24,19 +26,31 @@ services:
         env_file:
             - config
 
-    rtorrent:
-        image: kelvinchen/seedbox:rtorrent
-        build: Dockerfiles/rtorrent
+    # rtorrent:
+    #     image: kelvinchen/seedbox:rtorrent
+    #     build: Dockerfiles/rtorrent
+    #     restart: always
+    #     networks:
+    #         - main
+    #     ports:
+    #         - "49161:49161"
+    #         - "49161:49161/udp"
+    #         - "6881:6881/udp"
+    #     volumes:
+    #         - config:/config
+    #         - torrents:/torrents
+
+    deluge:
+        image: linuxserver/deluge
         restart: always
         networks:
             - main
         ports:
-            - "49161:49161"
-            - "49161:49161/udp"
-            - "6881:6881/udp"
+            - "8112:8112"
+            - "58846:58846"
         volumes:
-            - config:/config
             - torrents:/torrents
+            - deluge:/config
 
     plex:
         image: kelvinchen/seedbox:plex
