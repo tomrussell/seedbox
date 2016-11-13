@@ -2,7 +2,7 @@
 
 rm -f /config/deluged.pid
 
-mkdir -p /config/frontend
+mkdir -p /config/deluge
 
-deluged -c /config/deluge -L info -l /config/deluged.log
+deluged -c /config/deluge -L info -l /config/deluge/deluged.log
 deluge-web -c /config/deluge
