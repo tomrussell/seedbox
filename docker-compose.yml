@@ -8,8 +8,6 @@ volumes:
         driver: local
     torrents:
         driver: local
-    deluge:
-        driver: local
 
 services:
     frontend:
@@ -26,22 +24,9 @@ services:
         env_file:
             - config
 
-    # rtorrent:
-    #     image: kelvinchen/seedbox:rtorrent
-    #     build: Dockerfiles/rtorrent
-    #     restart: always
-    #     networks:
-    #         - main
-    #     ports:
-    #         - "49161:49161"
-    #         - "49161:49161/udp"
-    #         - "6881:6881/udp"
-    #     volumes:
-    #         - config:/config
-    #         - torrents:/torrents
-
     deluge:
-        image: linuxserver/deluge
+        image: tomrussell/seedbox:deluge
+        build: Dockerfiles/deluge
         restart: always
         networks:
             - main
@@ -50,7 +35,9 @@ services:
             - "58846:58846"
         volumes:
             - torrents:/torrents
-            - deluge:/config
+            - config:/config
+        env_file:
+            - config
 
     plex:
         image: kelvinchen/seedbox:plex
@@ -75,40 +62,3 @@ services:
         volumes:
             - config:/config
             - torrents:/torrents
-
-    sonarr:
-        image: kelvinchen/seedbox:sonarr
-        build: Dockerfiles/sonarr
-        restart: always
-        networks:
-            - main
-        volumes:
-            - config:/config
-            - torrents:/torrents
-
-    syncthing:
-        image: kelvinchen/seedbox:syncthing
-        build: Dockerfiles/syncthing
-        restart: always
-        networks:
-            - main
-        ports:
-            - "22000:22000"
-            - "21027:21027/udp"
-        volumes:
-            - config:/config
-            - torrents:/torrents
-
-    openvpn:
-        image: kelvinchen/seedbox:openvpn
-        build: Dockerfiles/openvpn
-        restart: always
-        networks:
-            - main
-        ports:
-            - "1194:1194/udp"
-        volumes:
-            - config:/config
-            - torrents:/torrents
-        cap_add:
-            - NET_ADMIN

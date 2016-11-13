@@ -1,22 +1,16 @@
-FROM timhaak/base:latest
+FROM buildpack-deps:xenial-scm
 MAINTAINER Tom Russell <tejrussell@icloud.com>
 
-RUN apt-get install -qy software-properties-common && \
-    add-apt-repository ppa:deluge-team/ppa && \
-    apt-get update -q && \
-    apt-get install -qy deluged deluge-web
+RUN apt-get update; apt-get install -y \
+    deluged \
+    deluge-web
 
-ADD start.sh /start.sh
+ADD entrypoint.sh /opt/entrypoint.sh
+RUN chmod a+x /opt/entrypoint.sh
 
-VOLUME ["/data"]
+VOLUME /config
+VOLUME /torrents
 
-# Torrent port
-EXPOSE 53160 53160/udp
+EXPOSE 8112 58846 53160 53160/udp
 
-# WebUI
-EXPOSE 8112
-
-# Daemon
-EXPOSE 58846
-
-CMD ["/start.sh"]
+CMD ["/opt/entrypoint.sh"]

@@ -7,8 +7,8 @@ VOLUME /config
 
 EXPOSE 80 443
 
-ENV USERNAME=user \
-    PASSWORD=hunter2 \
+ENV USERNAME=tom \
+    PASSWORD=russell \
     USE_SSL=false
 
 COPY nginx.conf common_default.conf ssl.conf /etc/nginx/
