@@ -43,7 +43,7 @@ services:
         image: kelvinchen/seedbox:plex
         build: Dockerfiles/plex
         restart: always
-        networks: host
+        network_mode: host
         volumes:
             - config:/config
             - torrents:/torrents
