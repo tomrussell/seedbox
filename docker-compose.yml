@@ -43,19 +43,7 @@ services:
         image: kelvinchen/seedbox:plex
         build: Dockerfiles/plex
         restart: always
-        networks:
-            - main
-        ports:
-            - "32400:32400"
-            - "1900:1900"
-            - "3005:3005"
-            - "5353:5353"
-            - "8324:8324"
-            - "32410:32410"
-            - "32412:32412"
-            - "32413:32413"
-            - "32414:32414"
-            - "32469:32469"
+        networks: host
         volumes:
             - config:/config
             - torrents:/torrents
