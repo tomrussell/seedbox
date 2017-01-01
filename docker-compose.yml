@@ -38,38 +38,38 @@ services:
         env_file:
             - config
 
-    # deluge:
-    #     image: tomrussell/seedbox:deluge
-    #     build: Dockerfiles/deluge
-    #     restart: always
-    #     networks:
-    #         - main
-    #     ports:
-    #         - "8112:8112"
-    #         - "58846:58846"
-    #     volumes:
-    #         - torrents:/torrents
-    #         - config:/config
-    #     env_file:
-    #         - config
-    #
-    # plex:
-    #     image: kelvinchen/seedbox:plex
-    #     build: Dockerfiles/plex
-    #     restart: always
-    #     network_mode: host
-    #     volumes:
-    #         - config:/config
-    #         - torrents:/torrents
-    #     env_file:
-    #         - config
-    #
-    # sickrage:
-    #     image: kelvinchen/seedbox:sickrage
-    #     build: Dockerfiles/sickrage
-    #     restart: always
-    #     networks:
-    #         - main
-    #     volumes:
-    #         - config:/config
-    #         - torrents:/torrents
+    deluge:
+        image: tomrussell/seedbox:deluge
+        build: Dockerfiles/deluge
+        restart: always
+        networks:
+            - main
+        ports:
+            - "8112:8112"
+            - "58846:58846"
+        volumes:
+            - torrents:/torrents
+            - config:/config
+        env_file:
+            - config
+
+    plex:
+        image: kelvinchen/seedbox:plex
+        build: Dockerfiles/plex
+        restart: always
+        network_mode: host
+        volumes:
+            - config:/config
+            - torrents:/torrents
+        env_file:
+            - config
+
+    sickrage:
+        image: kelvinchen/seedbox:sickrage
+        build: Dockerfiles/sickrage
+        restart: always
+        networks:
+            - main
+        volumes:
+            - config:/config
+            - torrents:/torrents
