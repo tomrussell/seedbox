@@ -24,6 +24,20 @@ services:
         env_file:
             - config
 
+    couch:
+        image: tomrussell/seedbox:couch
+        build: Dockerfiles/couchpotato
+        restart: always
+        networks:
+            - main
+        ports:
+            - "5050:5050"
+        volumes:
+            - torrents:/torrents
+            - config:/config
+        env_file:
+            - config
+
     deluge:
         image: tomrussell/seedbox:deluge
         build: Dockerfiles/deluge
